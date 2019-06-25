@@ -2,7 +2,7 @@
   <library name="Mojarra-2.2.1" type="jsf">
     <properties version="2.2.1" />
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/javax.faces-2.2.1.jar!/" />
+      <root url="jar://$USER_HOME$/IdeaProjects/ProjetPSI/lib/javax.faces-2.2.1.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
