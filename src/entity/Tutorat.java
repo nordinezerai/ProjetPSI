@@ -1,28 +1,42 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.*;
 
 @Entity
-@Table(name="T_TUTORAT")
+@Table(name="t_tutorat")
 public class Tutorat implements Serializable{
 
     private static final long serialVersionUID = 5L;
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    @Column(name="ID")
+    @Column(name="id")
     private Integer id;
-    @Column(name="ID_ENS")
-    private Integer idEns;
-    @Column(name="ID_ETU")
-    private Integer idEtu;
-    @Column(name="ANNEE")
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_etu")
+    private Etudiant etudiant;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_ens")
+    private Enseignant enseignant;
+
+    @Column(name="annee")
     private Integer annee;
-    @Column(name="ENTREPRISE")
+    @Column(name="entreprise")
     private String entreprise;
 
-    public Tutorat() {
+    public Tutorat(){
+
+    }
+
+    public Tutorat(Etudiant etudiant,Enseignant enseignant,int annee,String entreprise) {
+        this.etudiant = etudiant;
+        this.enseignant = enseignant;
+        this.annee = annee;
+        this.entreprise = entreprise;
     }
 
     public Integer getId() {
@@ -33,20 +47,20 @@ public class Tutorat implements Serializable{
         this.id = id;
     }
 
-    public Integer getIdEns() {
-        return idEns;
+    public Etudiant getEtudiant() {
+        return etudiant;
     }
 
-    public void setIdEns(Integer idEns) {
-        this.idEns = idEns;
+    public void setEtudiant(Etudiant etudiant) {
+        this.etudiant = etudiant;
     }
 
-    public Integer getIdEtu() {
-        return idEtu;
+    public Enseignant getEnseignant() {
+        return enseignant;
     }
 
-    public void setIdEtu(Integer idEtu) {
-        this.idEtu = idEtu;
+    public void setEnseignant(Enseignant enseignant) {
+        this.enseignant = enseignant;
     }
 
     public Integer getAnnee() {

@@ -4,20 +4,20 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
-@Table(name="T_ETU")
+@Table(name="t_etu")
 public class Etudiant implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    @Column(name="ID")
+    @Column(name="id")
     private Integer id;
-    @Column(name="NOM")
+    @Column(name="nom")
     private String nom;
-    @Column(name="PRENOM")
+    @Column(name="prenom")
     private String prenom;
-    @Column(name="PROMO")
+    @Column(name="promo")
     private String promo;
 
     public Etudiant() {

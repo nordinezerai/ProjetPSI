@@ -9,11 +9,5 @@ import utils.HibernateUtils;
 public class Main {
     public static void main(String[] args){
         HibernateUtils h = new HibernateUtils();
-        Session s = null;
-        if(s == null || !s.isOpen()) s = HibernateUtils.getSession();
-//        Query q = s.createQuery("from t_etu where nom='toto'");
-//
-//        Etudiant u = (Etudiant)q.uniqueResult();
-//        System.out.print(u.getNom());
     }
 }

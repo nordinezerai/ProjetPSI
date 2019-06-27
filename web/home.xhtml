@@ -5,25 +5,58 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.prime.com.tr/ui">
+
 <h:head>
     <title>Title</title>
 </h:head>
 <h:body>
-    <p:panel header="Importer vos données Excel" style="width: 700;">
-        <h:form id="importForm">
-            <h:panelGrid columns="3" cellpadding="2">
-                <h:outputLabel for="#{contactBean.lastName}"
-                               value="#{msg['contact.nom']}" />
-                <h:inputText value="#{contactBean.lastName}"
-                             label="LastName"></h:inputText>
-
-
+    <center>
+        <p:panel header="Importer vos données Excel" style="width: 700;">
+            <h:form id="importForm">
+                
                 <h:commandButton id="import" value="import" action="#{tutoratBean.getTutorats}">
-                    <f:ajax execute="importForm" render=":dataTableForm :importForm" update=":dataTableForm" resetValues="true"/>
+                    <f:ajax execute="importForm" render=":dataTableForm :importForm" update=":dataTableForm"
+                            resetValues="true"/>
                 </h:commandButton>
-            </h:panelGrid>
+
+            </h:form>
+        </p:panel>
+
+        <h:form id="dataTableForm">
+            <p:dataTable id="dataTable" var="t" value="#{tutoratBean.tutorats}" rendered="#{not empty tutoratBean.tutorats}"
+                         selection="#{tutoratBean.tutorat}" selectionMode="single"
+                         style="width: 700" rowKey="#{t.id}" first="#{t.id}" paginator="true" rows="7" editable="true">
+
+                <p:column sortBy="#{t.id}">
+                    <f:facet name="header">
+                        <h:outputText value="id"/>
+                    </f:facet>
+                    <h:outputText value="#{t.id}"/>
+                </p:column>
+
+                <p:column sortBy="#{t.etudiant.nom}">
+                    <f:facet name="header">
+                        <h:outputText value="nom etudiant"/>
+                    </f:facet>
+                    <h:outputText value="#{t.etudiant.nom}"/>
+                </p:column>
+
+                <p:column sortBy="#{t.enseignant.nom}">
+                    <f:facet name="header">
+                        <h:outputText value="nom enseignant"/>
+                    </f:facet>
+                    <h:outputText value="#{t.enseignant.nom}"/>
+                </p:column>
+
+                <p:column>
+                    <h:commandButton value="modifier" action="#{tutoratBean.edit(t)}">
+                        <f:ajax execute=":dataTableForm"/>
+                    </h:commandButton>
+                </p:column>
+
+            </p:dataTable>
         </h:form>
-    </p:panel>
+    </center>
 </h:body>
 </html>

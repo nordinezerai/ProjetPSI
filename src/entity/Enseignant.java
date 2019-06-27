@@ -4,18 +4,18 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
-@Table(name="T_ENS")
+@Table(name="t_ens")
 public class Enseignant implements Serializable{
 
     private static final long serialVersionUID = 2L;
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    @Column(name="ID")
+    @Column(name="id")
     private Integer id;
-    @Column(name="NOM")
+    @Column(name="nom")
     private String nom;
-    @Column(name="PRENOM")
+    @Column(name="prenom")
     private String prenom;
 
     public Enseignant() {

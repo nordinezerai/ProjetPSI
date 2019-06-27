@@ -1,19 +1,19 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="Projet_PSI:war exploded">
-    <output-path>$PROJECT_DIR$/out/artifacts/Projet_PSI_war_exploded</output-path>
+  <artifact type="exploded-war" name="ProjetPSI:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/ProjetPSI_war_exploded</output-path>
     <root id="root">
-      <element id="javaee-facet-resources" facet="ProjetPSI/web/Web" />
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="ProjetPSI" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Mojarra-2.2.1" />
-          <element id="library" level="project" name="PrimeFaces-6.1" />
-          <element id="library" level="project" name="Hibernate 3.5.4-3.5.4" />
+          <element id="library" level="project" name="PrimeFaces-2.2.1" />
           <element id="library" level="project" name="postgresql-42.2.6" />
+          <element id="library" level="project" name="Hibernate 3.5.4-3.5.4" />
         </element>
       </element>
+      <element id="javaee-facet-resources" facet="ProjetPSI/web/Web" />
     </root>
   </artifact>
 </component>
