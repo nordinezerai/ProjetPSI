@@ -31,7 +31,7 @@
     <orderEntry type="library" exported="" scope="PROVIDED" name="Tomcat 8.0.47" level="application_server_libraries" />
     <orderEntry type="library" exported="" name="Mojarra-2.2.1" level="project" />
     <orderEntry type="library" exported="" name="Hibernate 3.5.4-3.5.4" level="project" />
-    <orderEntry type="library" exported="" name="PrimeFaces-2.2.1" level="project" />
+    <orderEntry type="library" exported="" name="PrimeFaces-6.1" level="project" />
     <orderEntry type="library" name="postgresql-42.2.6" level="project" />
   </component>
 </module>

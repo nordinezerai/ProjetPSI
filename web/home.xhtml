@@ -5,7 +5,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.prime.com.tr/ui">
+      xmlns:p="http://primefaces.org/ui">
 
 <h:head>
     <title>Title</title>
@@ -14,7 +14,11 @@
     <center>
         <p:panel header="Importer vos données Excel" style="width: 700;">
             <h:form id="importForm">
-                
+                <h:form enctype="multipart-data">
+                    <p:fileUpload fileUploadListener="#{fichierBean.upload}" auto="true">
+                    </p:fileUpload>
+
+                </h:form>
                 <h:commandButton id="import" value="import" action="#{tutoratBean.getTutorats}">
                     <f:ajax execute="importForm" render=":dataTableForm :importForm" update=":dataTableForm"
                             resetValues="true"/>
@@ -24,7 +28,8 @@
         </p:panel>
 
         <h:form id="dataTableForm">
-            <p:dataTable id="dataTable" var="t" value="#{tutoratBean.tutorats}" rendered="#{not empty tutoratBean.tutorats}"
+            <p:dataTable id="dataTable" var="t" value="#{tutoratBean.tutorats}"
+                         rendered="#{not empty tutoratBean.tutorats}"
                          selection="#{tutoratBean.tutorat}" selectionMode="single"
                          style="width: 700" rowKey="#{t.id}" first="#{t.id}" paginator="true" rows="7" editable="true">
 

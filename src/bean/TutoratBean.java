@@ -25,6 +25,7 @@ public class TutoratBean implements Serializable {
     }
 
     public Tutorat getTutorat() {
+
         return tutorat;
     }
 
