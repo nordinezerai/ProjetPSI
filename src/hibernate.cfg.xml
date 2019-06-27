@@ -4,18 +4,19 @@
 <hibernate-configuration>
   <session-factory>
     <!--  Paramètres de connexion à la base de données -->
-    <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL82Dialect</property>
+    <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
     <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-    <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/projetpsi</property>
+    <property name="hibernate.connection.url">jdbc:postgresql://localhost:5433/projetpsi</property>
     <property name="hibernate.connection.username">postgres</property>
     <property name="hibernate.connection.password">toor</property>
 	<property name="connection.pool_size">1</property>
     <!-- Comportement pour la conservation des tables -->
-    <property name="hbm2ddl.auto">validate</property>
+    <property name="hbm2ddl.auto">create</property>
 
     <!-- Fichiers à mapper -->
     <mapping class="entity.Enseignant" />
 	<mapping class="entity.Etudiant" />
+    <mapping class="entity.Tutorat" />
 	
   </session-factory>
 </hibernate-configuration>

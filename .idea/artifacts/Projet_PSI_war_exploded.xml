@@ -10,7 +10,7 @@
         <element id="directory" name="lib">
           <element id="library" level="project" name="Mojarra-2.2.1" />
           <element id="library" level="project" name="PrimeFaces-6.1" />
-          <element id="library" level="project" name="Hibernate 5.4.2-5.4.2" />
+          <element id="library" level="project" name="Hibernate 3.5.4-3.5.4" />
           <element id="library" level="project" name="postgresql-42.2.6" />
         </element>
       </element>
