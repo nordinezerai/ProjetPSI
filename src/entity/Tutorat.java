@@ -5,26 +5,27 @@ import java.util.Collection;
 import javax.persistence.*;
 
 @Entity
-@Table(name="t_tutorat")
+@Table(name="t_tutorat",uniqueConstraints=@UniqueConstraint(columnNames= {"id_etu","id_ens","annee"}))
 public class Tutorat implements Serializable{
 
     private static final long serialVersionUID = 5L;
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id")
     private Integer id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "id_etu")
     private Etudiant etudiant;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "id_ens")
     private Enseignant enseignant;
 
     @Column(name="annee")
     private Integer annee;
+
     @Column(name="entreprise")
     private String entreprise;
 

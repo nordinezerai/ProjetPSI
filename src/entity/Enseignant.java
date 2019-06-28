@@ -10,7 +10,7 @@ public class Enseignant implements Serializable{
     private static final long serialVersionUID = 2L;
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id")
     private Integer id;
     @Column(name="nom")

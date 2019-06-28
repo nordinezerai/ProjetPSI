@@ -10,7 +10,7 @@ public class Etudiant implements Serializable{
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id")
     private Integer id;
     @Column(name="nom")
@@ -23,9 +23,10 @@ public class Etudiant implements Serializable{
     public Etudiant() {
     }
 
-    public Etudiant(String nom, String prenom) {
+    public Etudiant(String nom, String prenom, String promo) {
         this.nom = nom;
         this.prenom = prenom;
+        this.promo = promo;
     }
 
     public Integer getId() {

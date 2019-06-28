@@ -15,11 +15,11 @@
         <p:panel header="Importer vos données Excel" style="width: 700;">
             <h:form id="importForm">
                 <h:form enctype="multipart-data">
-                    <p:fileUpload fileUploadListener="#{fichierBean.upload}" auto="true">
+                    <p:fileUpload fileUploadListener="#{tutoratBean.upload}" auto="true">
                     </p:fileUpload>
 
                 </h:form>
-                <h:commandButton id="import" value="import" action="#{tutoratBean.getTutorats}">
+                <h:commandButton id="import" value="import" action="#{tutoratBean.importData}">
                     <f:ajax execute="importForm" render=":dataTableForm :importForm" update=":dataTableForm"
                             resetValues="true"/>
                 </h:commandButton>
