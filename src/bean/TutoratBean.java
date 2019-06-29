@@ -6,6 +6,8 @@ import entity.Tutorat;
 import org.apache.commons.io.FilenameUtils;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
+import services.EnseignantService;
+import services.EtudiantService;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,10 +27,14 @@ public class TutoratBean implements Serializable {
 
     private static final long serialVersionUID = 6L;
 
+    private EtudiantService etudiantService = new EtudiantService();
+    private EnseignantService enseignantService = new EnseignantService();
+
     private Collection<Tutorat> tutorats;
     private Tutorat tutorat;
 
     private String fileName;
+    private String uploadPath="C:\\Users\\nino\\IdeaProjects\\ProjetPSI\\web\\WEB-INF\\uploads";
 
     public Collection<Tutorat> getTutorats() {
         return tutorats;
@@ -57,7 +63,7 @@ public class TutoratBean implements Serializable {
 
     public void upload(FileUploadEvent event) {
         UploadedFile uploadedFile = event.getFile();
-        Path folder = Paths.get("/Users/nino/IdeaProjects/ProjetPSI/web/WEB-INF/uploads");
+        Path folder = Paths.get(uploadPath);
         String filename = FilenameUtils.getBaseName(uploadedFile.getFileName());
         String extension = FilenameUtils.getExtension(uploadedFile.getFileName());
         try {
@@ -73,8 +79,6 @@ public class TutoratBean implements Serializable {
 
     public void importData(){
 
-        Collection<Enseignant> enseignants = new ArrayList<Enseignant>();
-
         try {
             Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
             String myDB = "jdbc:odbc:Driver={Microsoft Excel Driver (*.xls, *.xlsx, *.xlsm, *.xlsb)};DBQ="+ fileName +";" + "DriverID=22;READONLY=false";
@@ -82,7 +86,12 @@ public class TutoratBean implements Serializable {
             Connection con = DriverManager.getConnection(myDB, "", "");
             Statement stmt = con.createStatement();
 
-            ResultSet rs = stmt.executeQuery("select distinct Nom_APP, Prenom, NOM_TE, Prenom_TE, PROMO, ANNEE, entreprise  from [Feuil1$] ");
+            ResultSet rs = stmt.executeQuery("select distinct Nom_APP, Prenom, NOM_TE, Prenom_TE, PROMO, ANNEE, entreprise  from [Feuil1$] where Nom_APP <> null and NOM_TE <> null");
+
+            Collection<Etudiant> etudiants = etudiantService.getAllEtudiants();
+            Collection<Enseignant> enseignants = enseignantService.getAllEnseignants();
+
+            tutorats = new ArrayList<Tutorat>();
 
             while (rs.next()) {
                 String nomEtu = rs.getString(1);
@@ -99,7 +108,7 @@ public class TutoratBean implements Serializable {
 
                 tutorats.add(t);
 
-                System.out.println(t.getEtudiant().getNom());
+                System.out.println(t.getEtudiant().getNom() + "---" + t.getEnseignant().getNom());
             }
 
             rs.close();

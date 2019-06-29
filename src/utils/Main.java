@@ -7,7 +7,6 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import utils.HibernateUtils;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,24 +14,12 @@ import java.util.Collection;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
     String s = "Mohamed";
-    String s2 = "Moammed";
+    String s2 = "Mohamed";
     //restoreDataBase();
-    //System.out.println(calculate(s,s2));
-        try {
-            Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
-            String myDB = "jdbc:odbc:Driver={Microsoft Excel Driver (*.xls, *.xlsx, *.xlsm, *.xlsb)};DBQ="+ "web\\WEB-INF\\uploads\\TE-L3_APP-4427590716652011895.xls" +";" + "DriverID=22;READONLY=false";
-
-            Connection con = DriverManager.getConnection(myDB, "", "");
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
+    System.out.println(LevenshteinDistance.computeLevenshteinDistance(s,s2));
     }
 
     public static void restoreDataBase(){
@@ -164,30 +151,4 @@ public class Main {
             }
         }
     }
-
-//    static int calculate(String x, String y) {
-//        if (x.isEmpty()) {
-//            return y.length();
-//        }
-//
-//        if (y.isEmpty()) {
-//            return x.length();
-//        }
-//
-//        int substitution = calculate(x.substring(1), y.substring(1))
-//                + costOfSubstitution(x.charAt(0), y.charAt(0));
-//        int insertion = calculate(x, y.substring(1)) + 1;
-//        int deletion = calculate(x.substring(1), y) + 1;
-//
-//        return min(substitution, insertion, deletion);
-//    }
-//
-//    public static int costOfSubstitution(char a, char b) {
-//        return a == b ? 0 : 1;
-//    }
-//
-//    public static int min(int... numbers) {
-//        return Arrays.stream(numbers)
-//                .min().orElse(Integer.MAX_VALUE);
-//    }
 }
