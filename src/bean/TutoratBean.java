@@ -71,6 +71,8 @@ public class TutoratBean implements Serializable {
             InputStream input = uploadedFile.getInputstream();
             Files.copy(input, file, StandardCopyOption.REPLACE_EXISTING);
             this.fileName = file.toString();
+            input.close();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -91,7 +93,7 @@ public class TutoratBean implements Serializable {
             Collection<Etudiant> etudiants = etudiantService.getAllEtudiants();
             Collection<Enseignant> enseignants = enseignantService.getAllEnseignants();
 
-            tutorats = new ArrayList<Tutorat>();
+            this.tutorats = new ArrayList<Tutorat>();
 
             while (rs.next()) {
                 String nomEtu = rs.getString(1);
@@ -103,20 +105,33 @@ public class TutoratBean implements Serializable {
                 String entreprise = rs.getString(7);
 
                 Etudiant etu = new Etudiant(nomEtu,prenomEtu,promo);
+                etu.setId(rs.getRow());
                 Enseignant ens = new Enseignant(nomEns,prenomEns);
+                ens.setId(rs.getRow());
                 Tutorat t = new Tutorat(etu,ens,annee,entreprise);
+                t.setId(rs.getRow());
+                this.tutorats.add(t);
 
-                tutorats.add(t);
-
-                System.out.println(t.getEtudiant().getNom() + "---" + t.getEnseignant().getNom());
+                System.out.println(t.getId() + "---" + t.getEtudiant().getNom() + "---" + t.getEnseignant().getNom());
             }
 
             rs.close();
             stmt.close();
+            con.close();
+
+            Files.delete(Paths.get(fileName));
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
+
+    }
+
+    public void edit (Tutorat t){
+        System.out.print(t.getEtudiant().getNom());
     }
 }

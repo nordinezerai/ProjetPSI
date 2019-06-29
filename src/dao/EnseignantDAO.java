@@ -21,7 +21,7 @@ public class EnseignantDAO {
         Collection<Enseignant> enseignants = null;
 
         try {
-            enseignants = (Collection<Enseignant>)s.createQuery("FROM t_ens").list();
+            enseignants = (Collection<Enseignant>)s.createQuery("FROM Enseignant").list();
 
             t.commit();
         } catch (HibernateException e) {

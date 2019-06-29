@@ -20,7 +20,7 @@ public class EtudiantDAO {
         Collection<Etudiant> etudiants = null;
 
         try {
-            etudiants = (Collection<Etudiant>)s.createQuery("FROM t_etu").list();
+            etudiants = (Collection<Etudiant>)s.createQuery("FROM Etudiant").list();
 
             t.commit();
         } catch (HibernateException e) {
