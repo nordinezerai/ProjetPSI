@@ -1,8 +1,8 @@
 package dao;
 
 import entity.Enseignant;
-import entity.Etudiant;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import utils.HibernateUtils;
@@ -31,5 +31,31 @@ public class EnseignantDAO {
             s.close();
         }
         return enseignants;
+    }
+
+    public Enseignant getEnseignant(String nom, String prenom) {
+        if(s == null || !s.isOpen()) s = HibernateUtils.getSession();
+
+        Query q = s.createQuery("from Enseignant where nom=:nom and prenom=:prenom ").setString("nom", nom.trim()).setString("prenom", prenom.trim());
+
+        Enseignant e = (Enseignant)q.uniqueResult();
+
+        return e;
+    }
+
+    public void saveEnseignant(Enseignant ens) {
+        s = HibernateUtils.getSession();
+
+        Transaction t = s.beginTransaction();
+
+        try {
+            s.save(ens);
+            t.commit();
+        } catch (HibernateException ex) {
+            if (t!=null) t.rollback();
+            ex.printStackTrace();
+        } finally {
+            s.close();
+        }
     }
 }

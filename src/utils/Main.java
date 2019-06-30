@@ -13,15 +13,21 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+//Main d'initialisation de données et de test de méthodes
 public class Main {
+
     public static void main(String[] args) {
 
     String s = "Mohamed";
-    String s2 = "Mohamed";
-    //restoreDataBase();
+    String s2 = "Moamed";
+
     System.out.println(LevenshteinDistance.computeLevenshteinDistance(s,s2));
+
+    restoreDataBase();
+
     }
 
+    // Permet de remplir la BD avec des valeurs de références dans les tables de références étudiants et enseignants
     public static void restoreDataBase(){
         HibernateUtils h = new HibernateUtils();
 
@@ -34,41 +40,42 @@ public class Main {
             transaction = session.beginTransaction();
             transaction.begin();
 
-            Etudiant etu0 = new Etudiant("DOS SANTOS","Jérémie","2018");
-            Etudiant etu = new Etudiant("DIAGNE","Awa","2018");
-            Etudiant etu2 = new Etudiant("KAPLAN","Fabien","2018");
-            Etudiant etu3 = new Etudiant("BENAMAR","Merouane","2018");
-            Etudiant etu4 = new Etudiant("AIT SI AMER","Melissa","2018");
-            Etudiant etu5 = new Etudiant("GOULOU","Touré","2018");
-            Etudiant etu6 = new Etudiant("KEZOUI","Kenza","2018");
-            Etudiant etu7 = new Etudiant("AMROUCHE","Belkacem","2018");
-            Etudiant etu8 = new Etudiant("SIDIBE","Yoro","2018");
-            Etudiant etu9 = new Etudiant("AMIACH","Hugo","2018");
-            Etudiant etu10 = new Etudiant("CARPENTIER","Antoine","2018");
-            Etudiant etu11 = new Etudiant("ICHAY","Jérémy","2018");
-            Etudiant etu12 = new Etudiant("IKNI","Yannis","2018");
-            Etudiant etu13 = new Etudiant("DOS SANTOS","Nicolas","2018");
-            Etudiant etu14 = new Etudiant("ADJEODA","Firdaws","2018");
-            Etudiant etu15 = new Etudiant("SADAOUI","Kamilia","2018");
-            Etudiant etu16 = new Etudiant("BESCOS HUETE","Ruben","2018");
-            Etudiant etu17 = new Etudiant("BABOU","Zina","2018");
-            Etudiant etu18 = new Etudiant("DANI","Sofian","2018");
-            Etudiant etu19 = new Etudiant("TANDIA","Ganda","2018");
-            Etudiant etu20 = new Etudiant("KRANIQI","Nora","2018");
-            Etudiant etu21 = new Etudiant("ADMANE","Amine","2018");
-            Etudiant etu22 = new Etudiant("SI-MOHAMMEDI","Sarah","2018");
-            Etudiant etu23 = new Etudiant("SERSOUR","Yasmine","2018");
-            Etudiant etu24 = new Etudiant("HILAIRE","Julien","2018");
-            Etudiant etu25 = new Etudiant("YAHIAOUI","Mourad","2018");
-            Etudiant etu26 = new Etudiant("VIDO","Uriel","2018");
-            Etudiant etu27 = new Etudiant("KRYLOV","Kirill","2018");
-            Etudiant etu28 = new Etudiant("SI-SALAH","Thinhinane","2018");
-            Etudiant etu29 = new Etudiant("BENKANIA","Mustapha","2018");
-            Etudiant etu30 = new Etudiant("DEMOLLIERE","Clément","2018");
-            Etudiant etu31 = new Etudiant("JAA","Yassine","2018");
-            Etudiant etu32 = new Etudiant("MA","Quentin","2018");
-            Etudiant etu33 = new Etudiant("ROCHE GERALD","Prashan","2018");
+            Etudiant etu0 = new Etudiant("DOS SANTOS","Jérémie","L3_MIAGE_APP_1");
+            Etudiant etu = new Etudiant("DIAGNE","Awa","L3_MIAGE_APP_1");
+            Etudiant etu2 = new Etudiant("KAPLAN","Fabien","L3_MIAGE_APP_2");
+            Etudiant etu3 = new Etudiant("BENAMAR","Merouane","L3_MIAGE_APP_2");
+            Etudiant etu4 = new Etudiant("AIT SI AMER","Melissa","L3_MIAGE_APP_1");
+            Etudiant etu5 = new Etudiant("GOULOU","Touré","L3_MIAGE_APP_2");
+            Etudiant etu6 = new Etudiant("KEZOUI","Kenza","L3_MIAGE_APP_1");
+            Etudiant etu7 = new Etudiant("AMROUCHE","Belkacem","L3_MIAGE_APP_1");
+            Etudiant etu8 = new Etudiant("SIDIBE","Yoro","L3_MIAGE_APP_1");
+            Etudiant etu9 = new Etudiant("AMIACH","Hugo","L3_MIAGE_APP_2");
+            Etudiant etu10 = new Etudiant("CARPENTIER","Antoine","L3_MIAGE_APP_1");
+            Etudiant etu11 = new Etudiant("ICHAY","Jérémy","L3_MIAGE_APP_1");
+            Etudiant etu12 = new Etudiant("IKNI","Yannis","L3_MIAGE_APP_2");
+            Etudiant etu13 = new Etudiant("DOS SANTOS","Nicolas","L3_MIAGE_APP_2");
+            Etudiant etu14 = new Etudiant("ADJEODA","Firdaws","L3_MIAGE_APP_1");
+            Etudiant etu15 = new Etudiant("SADAOUI","Kamilia","L3_MIAGE_APP_1");
+            Etudiant etu16 = new Etudiant("BESCOS HUETE","Ruben","L3_MIAGE_APP_2");
+            Etudiant etu17 = new Etudiant("BABOU","Zina","L3_MIAGE_APP_1");
+            Etudiant etu18 = new Etudiant("DANI","Sofian","L3_MIAGE_APP_1");
+            Etudiant etu19 = new Etudiant("TANDIA","Ganda","L3_MIAGE_APP_1");
+            Etudiant etu20 = new Etudiant("KRANIQI","Nora","L3_MIAGE_APP_1");
+            Etudiant etu21 = new Etudiant("ADMANE","Amine","L3_MIAGE_APP_2");
+            Etudiant etu22 = new Etudiant("SI-MOHAMMEDI","Sarah","L3_MIAGE_APP_2");
+            Etudiant etu23 = new Etudiant("SERSOUR","Yasmine","L3_MIAGE_APP_2");
+            Etudiant etu24 = new Etudiant("HILAIRE","Julien","L3_MIAGE_APP_2");
+            Etudiant etu25 = new Etudiant("YAHIAOUI","Mourad","L3_MIAGE_APP_2");
+            Etudiant etu26 = new Etudiant("VIDO","Uriel","L3_MIAGE_APP_1");
+            Etudiant etu27 = new Etudiant("KRYLOV","Kirill","L3_MIAGE_APP_1");
+            Etudiant etu28 = new Etudiant("SI-SALAH","Thinhinane","L3_MIAGE_APP_1");
+            Etudiant etu29 = new Etudiant("BENKANIA","Mustapha","L3_MIAGE_APP_1");
+            Etudiant etu30 = new Etudiant("DEMOLLIERE","Clément","L3_MIAGE_APP_2");
+            Etudiant etu31 = new Etudiant("JAA","Yassine","L3_MIAGE_APP_1");
+            Etudiant etu32 = new Etudiant("MA","Quentin","L3_MIAGE_APP_2");
+            Etudiant etu33 = new Etudiant("ROCHE GERALD","Prashan","L3_MIAGE_APP_2");
 
+            session.save(etu0);
             session.save(etu);
             session.save(etu2);
             session.save(etu3);
@@ -121,6 +128,7 @@ public class Main {
             Enseignant ens15 = new Enseignant("Rukoz-Castillo","Marta");
             Enseignant ens16 = new Enseignant("Zetlaoui","Mélanie");
 
+            session.save(ens0);
             session.save(ens);
             session.save(ens2);
             session.save(ens3);

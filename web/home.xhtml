@@ -4,34 +4,64 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
-    <title>Title</title>
+    <style type="text/css">
+        .green {
+            background-color: lawngreen !important;
+            background-image: none !important;
+            color: #000000 !important;
+        }
+        .orange {
+            background-color: darkorange !important;
+            background-image: none !important;
+            color: #000000 !important;
+        }
+        .red {
+            background-color: orangered !important;
+            background-image: none !important;
+            color: #000000 !important;
+        }
+    </style>
+
 </h:head>
 <h:body>
     <center>
         <p:panel header="Importer vos données Excel" style="width: 700;">
             <h:form id="importForm">
-                <h:form enctype="multipart-data">
-                    <p:fileUpload fileUploadListener="#{tutoratBean.upload}" auto="true">
+                <h:form id="uploadForm" enctype="multipart-data">
+
+                    <p:growl id="msgUpload" showDetail="true"/>
+
+                    <p:fileUpload fileUploadListener="#{tutoratBean.upload}" auto="true" label="Choisir un fichier" >
                     </p:fileUpload>
 
-                </h:form>
-                <h:commandButton id="import" value="import" action="#{tutoratBean.importData}">
-                    <f:ajax execute="importForm" render=":dataTableForm :importForm" update=":dataTableForm"
-                            resetValues="true"/>
-                </h:commandButton>
+                    <br/>
 
+                    <p:commandButton id="import" value="importer" action="#{tutoratBean.importData}" >
+                        <p:ajax execute="dataTableForm dataTable" render="dataTableForm dataTable" listener="#{tutoratBean.onUploadEdit}" update="dataTableForm msgUpload" />
+                    </p:commandButton>
+
+                </h:form>
             </h:form>
         </p:panel>
 
         <h:form id="dataTableForm">
+            <p:growl id="msgs" showDetail="true"/>
             <p:dataTable id="dataTable" var="t" value="#{tutoratBean.tutorats}"
                          rendered="#{not empty tutoratBean.tutorats}"
                          selection="#{tutoratBean.tutorat}" selectionMode="single"
-                         style="width: 700" rowKey="#{t.id}" first="#{t.id}" paginator="true" rows="7" editable="true">
+                         style="width:700" rowKey="#{t.id}" first="#{t.id}" paginator="true" rows="40" editable="true"
+                         rowStyleClass="#{t.scoreSimilarity eq 0 ? 'green':t.scoreSimilarity lt 4 ? 'orange':'red'}"   >
+
+                <f:facet name="header">
+                    Tutorat
+                </f:facet>
+
+                <p:ajax event="rowEdit" listener="#{tutoratBean.onRowEdit}" update=":dataTableForm:msgs" />
+                <p:ajax event="rowEditCancel" listener="#{tutoratBean.onRowCancel}" update=":dataTableForm:msgs" />
 
                 <p:column sortBy="#{t.id}">
                     <f:facet name="header">
@@ -40,27 +70,58 @@
                     <h:outputText value="#{t.id}"/>
                 </p:column>
 
-                <p:column sortBy="#{t.etudiant.nom}">
-                    <f:facet name="header">
-                        <h:outputText value="nom etudiant"/>
-                    </f:facet>
-                    <h:outputText value="#{t.etudiant.nom}"/>
+                <p:column headerText="Prénom étudiant">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{t.etudiant.prenom}" /></f:facet>
+                        <f:facet name="input">
+                            <h:selectOneMenu value="#{t.etudiant.prenom}" style="width:100%">
+                                <f:selectItems value="#{tutoratBean.etudiants}" var="etudiants" itemLabel="#{etudiants.prenom}" itemValue="#{etudiants.prenom}" />
+                            </h:selectOneMenu>
+                        </f:facet>
+                    </p:cellEditor>
                 </p:column>
 
-                <p:column sortBy="#{t.enseignant.nom}">
-                    <f:facet name="header">
-                        <h:outputText value="nom enseignant"/>
-                    </f:facet>
-                    <h:outputText value="#{t.enseignant.nom}"/>
+                <p:column headerText="Nom étudiant">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{t.etudiant.nom}" /></f:facet>
+                        <f:facet name="input">
+                            <h:selectOneMenu value="#{t.etudiant.nom}" style="width:100%">
+                                <f:selectItems value="#{tutoratBean.etudiants}" var="etudiants" itemLabel="#{etudiants.nom}" itemValue="#{etudiants.nom}" />
+                            </h:selectOneMenu>
+                        </f:facet>
+                    </p:cellEditor>
                 </p:column>
 
-                <p:column>
-                    <h:commandButton value="modifier" action="#{tutoratBean.edit(t)}">
-                        <f:ajax execute=":dataTableForm"/>
-                    </h:commandButton>
+                <p:column headerText="Prenom enseignant">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{t.enseignant.prenom}" /></f:facet>
+                        <f:facet name="input">
+                            <h:selectOneMenu value="#{t.enseignant.prenom}" style="width:100%" >
+                                <f:selectItems value="#{tutoratBean.enseignants}" var="enseignants" itemLabel="#{enseignants.prenom}" itemValue="#{enseignants.prenom}" />
+                            </h:selectOneMenu>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column headerText="Nom enseignant">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{t.enseignant.nom}" /></f:facet>
+                        <f:facet name="input">
+                            <h:selectOneMenu value="#{t.enseignant.nom}" style="width:100%">
+                                <f:selectItems value="#{tutoratBean.enseignants}" var="enseignants" itemLabel="#{enseignants.nom}" itemValue="#{enseignants.nom}" />
+                            </h:selectOneMenu>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <p:column style="width:35px">
+                    <p:rowEditor />
                 </p:column>
 
             </p:dataTable>
+            <br/>
+            <p:commandButton value="Valider" id="valid" update="msgs" action="#{tutoratBean.validate}" style="margin-right:20px;" styleClass="ui-priority-primary" rendered="#{not empty tutoratBean.tutorats}" />
+
         </h:form>
     </center>
 </h:body>

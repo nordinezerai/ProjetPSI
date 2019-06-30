@@ -29,6 +29,9 @@ public class Tutorat implements Serializable{
     @Column(name="entreprise")
     private String entreprise;
 
+    @Transient
+    private int scoreSimilarity;
+
     public Tutorat(){
 
     }
@@ -78,5 +81,13 @@ public class Tutorat implements Serializable{
 
     public void setEntreprise(String entreprise) {
         this.entreprise = entreprise;
+    }
+
+    public int getScoreSimilarity() {
+        return scoreSimilarity;
+    }
+
+    public void setScoreSimilarity(int scoreSimilarity) {
+        this.scoreSimilarity = scoreSimilarity;
     }
 }
